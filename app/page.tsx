@@ -9,7 +9,7 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-4">
-            LivingBrush
+            Tools
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Unleash your creativity with our collection of innovative digital painting tools. Each tool offers a unique
