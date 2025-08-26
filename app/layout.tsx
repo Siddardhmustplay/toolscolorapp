@@ -1,31 +1,24 @@
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import './globals.css'
+import type React from "react"
+import "./globals.css"
+import type { Metadata } from "next"
+import AnimatedBackground from "@/components/AnimatedBackground"
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: "Color Coin",
+  description: "Spin the light. Feel the spectrum.",
+    generator: 'v0.app'
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
-      </head>
-      <body>{children}</body>
+      <body className="min-h-screen bg-transparent antialiased">
+        {/* Background lives once at the root */}
+        <AnimatedBackground />
+
+        {/* Foreground container */}
+        <div className="relative z-10 min-h-screen">{children}</div>
+      </body>
     </html>
   )
 }

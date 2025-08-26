@@ -1,97 +1,79 @@
+"use client"
+
+import { motion } from "framer-motion"
+import SpinningCoin from "@/components/SpinningCoin"
+import ColorGrid from "@/components/ColorGrid"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/30 p-6">
-      <div className="mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-4">
-            Tools
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Unleash your creativity with our collection of innovative digital painting tools. Each tool offers a unique
-            way to express your artistic vision.
-          </p>
+    <div className="relative min-h-screen overflow-hidden">
+      <main className="relative z-10 min-h-screen">
+        {/* Nav */}
+        <nav className="flex justify-center items-center py-6 px-6">
+          <div className="flex gap-6">
+            <Link href="/games" className="focus:outline-none">
+              <motion.span
+                className="px-8 py-3 inline-block rounded-full font-semibold text-white text-lg shadow-lg transition-all duration-300 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-400 hover:via-purple-400 hover:to-indigo-400 hover:shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Games
+              </motion.span>
+            </Link>
+
+            <Link href="/tools" className="focus:outline-none">
+              <motion.span
+                className="px-8 py-3 inline-block rounded-full font-semibold text-white text-lg shadow-lg transition-all duration-300 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-400 hover:via-red-400 hover:to-pink-400 hover:shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+              >
+                Tools
+              </motion.span>
+            </Link>
+          </div>
+        </nav>
+
+        {/* Content */}
+        <div className="flex flex-col items-center justify-center py-16 px-6">
+          <header className="text-center mb-20">
+            <motion.h1
+              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 via-red-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6 drop-shadow-2xl"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Color Coin
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-white/90 font-medium drop-shadow-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Spin the light. Feel the spectrum.
+            </motion.p>
+          </header>
+
+          <section className="mb-24">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+            >
+              <SpinningCoin />
+            </motion.div>
+          </section>
+
+          <ColorGrid />
         </div>
-
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <ToolCard
-            title="Flow-Field Brush"
-            description="Paint with strokes that follow dynamic Perlin noise flow fields. Control chaos with cursor speed and customize particle behavior."
-            href="/tools/flow-field-brush"
-            gradient="from-blue-500 to-cyan-400"
-          />
-
-          <ToolCard
-            title="Palette Generator"
-            description="Generate harmonious color palettes with complementary, analogous, and triadic schemes. Lock favorites and export your creations."
-            href="/tools/palette-generator"
-            gradient="from-purple-500 to-pink-400"
-          />
-
-          <ToolCard
-            title="Symmetry Painter"
-            description="Create stunning symmetric patterns with real-time mirroring and radial symmetry modes. Perfect for mandala-style artwork."
-            href="/tools/symmetry-painter"
-            gradient="from-green-500 to-emerald-400"
-          />
-
-          <ToolCard
-            title="Living Organism Brush"
-            description="Plant seeds that grow into organic, fractal structures over time. Control DNA parameters and watch your art evolve."
-            href="/tools/living-organism-brush"
-            gradient="from-orange-500 to-red-400"
-          />
-
-          <ToolCard
-            title="Audio-Reactive Painter"
-            description="Let sound guide your brush. Microphone input controls size, color saturation, and mutation rates for dynamic audio-visual art."
-            href="/tools/audio-reactive"
-            gradient="from-indigo-500 to-purple-400"
-          />
-        </div>
-
-        {/* Get Started Button */}
-        <div className="text-center">
-          <Link href="/tools">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Explore All Tools
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </main>
-  )
-}
-
-function ToolCard({
-  title,
-  description,
-  href,
-  gradient,
-}: {
-  title: string
-  description: string
-  href: string
-  gradient: string
-}) {
-  return (
-    <Link href={href}>
-      <Card className="h-full transition-all duration-300 hover:scale-105 hover:shadow-xl border-2 hover:border-primary/20 group cursor-pointer">
-        <CardHeader>
-          <div
-            className={`w-12 h-12 rounded-lg bg-gradient-to-r ${gradient} mb-4 group-hover:scale-110 transition-transform duration-300`}
-          />
-          <CardTitle className="text-xl group-hover:text-primary transition-colors">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <CardDescription className="text-base leading-relaxed">{description}</CardDescription>
-        </CardContent>
-      </Card>
-    </Link>
+      </main>
+    </div>
   )
 }
